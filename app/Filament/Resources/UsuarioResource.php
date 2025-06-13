@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\Action;
 
 class UsuarioResource extends Resource
 {
@@ -49,6 +50,10 @@ class UsuarioResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('settings')
+                ->label('Configuración')
+                ->url(UsuarioResource::getUrl('settings'))
+                ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -71,6 +76,7 @@ class UsuarioResource extends Resource
             'index' => Pages\ListUsuarios::route('/'),
             'create' => Pages\CreateUsuario::route('/create'),
             'edit' => Pages\EditUsuario::route('/{record}/edit'),
+                    'settings' => Pages\Settings::route('/settings'), // tu página custom dentro del recurso
         ];
     }
 }
