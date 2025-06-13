@@ -23,12 +23,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'admin@example.com',
         //     'password' => bcrypt('password'), // Use bcrypt for password hashing
         // ]);
-        User::create([
-            'name' => 'admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('password'),
-                                 'email_verified_at' => now(),
+        $user = User::create([
+    'name' => 'admin',
+    'email' => 'admin@example.com',
+    'password' => bcrypt('password'),
+    'email_verified_at' => now(),
+]);
 
-        ]);
+$role = Role::firstOrCreate(['name' => 'admin']);
+$user->assignRole('admin');
     }
 }
