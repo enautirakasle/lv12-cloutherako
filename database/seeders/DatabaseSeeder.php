@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -24,14 +25,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'admin@example.com',
         //     'password' => bcrypt('password'), // Use bcrypt for password hashing
         // ]);
-        $user = User::create([
-    'name' => 'admin',
-    'email' => 'admin@example.com',
-    'password' => bcrypt('password'),
-    'email_verified_at' => now(),
-]);
 
-$role = Role::firstOrCreate(['name' => 'admin']);
-$user->assignRole('admin');
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+        ]);
     }
 }
