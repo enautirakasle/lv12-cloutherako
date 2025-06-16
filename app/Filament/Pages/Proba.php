@@ -8,8 +8,11 @@ use Filament\Tables\Table;
 use Filament\Pages\Page;
 use App\Models\Moto;
 
-class Proba extends Page
+class Proba extends Page implements Tables\Contracts\HasTable
 {
+
+    use Tables\Concerns\InteractsWithTable;
+
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.pages.proba';
@@ -28,7 +31,7 @@ class Proba extends Page
         $this->usuarioId = $usuario;
     }
 
-     public function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
             ->query(Moto::where('usuario_id', $this->usuarioId))
@@ -38,8 +41,8 @@ class Proba extends Page
             ])
             ->searchable()
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\EditAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ]);
     }
 }

@@ -3,4 +3,5 @@
         <h2 class="text-xl font-bold mb-4">Página para el usuario con ID: {{ $usuarioId }}</h2>
 
         {{ $this->table }}
+        
 </x-filament-panels::page>
