@@ -4,14 +4,23 @@ namespace App\Filament\Pages;
 
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Form;
+use Filament\Forms\Contracts\HasForms;
+
+
 
 use Filament\Pages\Page;
 use App\Models\Moto;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
-class Proba extends Page implements Tables\Contracts\HasTable
+class Proba extends Page implements Tables\Contracts\HasTable, HasForms
 {
 
     use Tables\Concerns\InteractsWithTable;
+        use InteractsWithForms;
+
+    protected static ?string $model = Moto::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
@@ -41,8 +50,44 @@ class Proba extends Page implements Tables\Contracts\HasTable
             ])
             ->searchable()
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
+                \Filament\Tables\Actions\EditAction::make()
+                    ->form([
+                        \Filament\Forms\Components\TextInput::make('matricula')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
+                \Filament\Tables\Actions\DeleteAction::make(),
+            ])->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    \Filament\Tables\Actions\DeleteBulkAction::make(),
+                    
+                    
+                ]),
             ]);
+    }
+
+    
+
+    public function getTitle(): string
+    {
+        return 'Motos del Usuario ' . $this->usuarioId;
+    }
+
+    public function getHeaderActions(): array
+    {
+        return [
+            \Filament\Actions\CreateAction::make()
+                ->form([
+                    \Filament\Forms\Components\TextInput::make('matricula')
+                        ->required()
+                        ->maxLength(255),
+                ])
+                ->action(function (array $data) {
+                    Moto::create([
+                        'matricula' => $data['matricula'],
+                        'usuario_id' => $this->usuarioId,
+                    ]);
+                }),
+        ];
     }
 }
