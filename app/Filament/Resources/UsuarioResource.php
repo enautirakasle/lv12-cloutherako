@@ -51,9 +51,13 @@ class UsuarioResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Action::make('settings')
-                ->label('Configuración')
-                ->url(UsuarioResource::getUrl('settings'))
-                ->openUrlInNewTab(),
+                    ->label('Configuración')
+                    ->url(UsuarioResource::getUrl('settings'))
+                    ->openUrlInNewTab(),
+                Action::make('zerbait')
+                    ->label('Zerbait')
+                    // ->url(route('filament.admin.pages.proba'))
+                    ->url(route('filament.admin.pages.proba.{usuario}', ['usuario' => 4]))
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -76,7 +80,7 @@ class UsuarioResource extends Resource
             'index' => Pages\ListUsuarios::route('/'),
             'create' => Pages\CreateUsuario::route('/create'),
             'edit' => Pages\EditUsuario::route('/{record}/edit'),
-                    'settings' => Pages\Settings::route('/settings'), // tu página custom dentro del recurso
+            'settings' => Pages\Settings::route('/settings'), // tu página custom dentro del recurso
         ];
     }
 }
