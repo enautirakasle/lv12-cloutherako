@@ -54,10 +54,9 @@ class UsuarioResource extends Resource
                     ->label('Configuración')
                     ->url(UsuarioResource::getUrl('settings'))
                     ->openUrlInNewTab(),
-                Action::make('zerbait')
-                    ->label('Zerbait')
-                    // ->url(route('filament.admin.pages.proba'))
-                    ->url(route('filament.admin.pages.proba.{usuario}', ['usuario' => 4]))
+                Action::make('misMotos')
+                    ->label('Nire motoak')
+                    ->url(fn ($record) => route('filament.admin.pages.proba.{usuario}', ['usuario' => $record->id]))
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

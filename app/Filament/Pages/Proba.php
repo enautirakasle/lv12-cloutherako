@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Filament\Pages;
-use App\Models\Usuario;
+
+use Filament\Tables;
+use Filament\Tables\Table;
 
 use Filament\Pages\Page;
+use App\Models\Moto;
 
 class Proba extends Page
 {
@@ -21,7 +24,22 @@ class Proba extends Page
     }
 
     public function mount(int $usuario): void
-{
-    $this->usuarioId = $usuario;
-}
+    {
+        $this->usuarioId = $usuario;
+    }
+
+     public function table(Table $table): Table
+    {
+        return $table
+            ->query(Moto::where('usuario_id', $this->usuarioId))
+            ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable(),
+                Tables\Columns\TextColumn::make('matricula')->searchable()->sortable(),
+            ])
+            ->searchable()
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ]);
+    }
 }
