@@ -13,18 +13,17 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use App\Models\Moto;
 use Illuminate\Testing\Fluent\Concerns\Has;
+use Illuminate\Support\Facades\Auth;
+use Filament\Notifications\Notification;
 
-class Proba extends Page implements Tables\Contracts\HasTable, HasForms
+class MotoPage extends Page implements Tables\Contracts\HasTable
 {
 
     use Tables\Concerns\InteractsWithTable;
-        use InteractsWithForms;
-
-    protected static ?string $model = Moto::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string $view = 'filament.pages.proba';
+    protected static string $view = 'filament.pages.moto-page';
 
     protected static bool $shouldRegisterNavigation = false; // Mostrar en el menú
 
@@ -32,7 +31,7 @@ class Proba extends Page implements Tables\Contracts\HasTable, HasForms
 
     public static function getSlug(): string
     {
-        return 'proba/{usuario}';
+        return 'moto-page/{usuario}';
     }
 
     public function mount(int $usuario): void
@@ -87,6 +86,11 @@ class Proba extends Page implements Tables\Contracts\HasTable, HasForms
                         'matricula' => $data['matricula'],
                         'usuario_id' => $this->usuarioId,
                     ]);
+                    Notification::make()
+                        ->title(Auth::user()->name . ' saved successfully')
+                        ->body('El coche ' . $data['matricula'] . ' ha sido añadido correctamente.')
+                        ->success()
+                        ->send();
                 }),
         ];
     }

@@ -56,7 +56,11 @@ class UsuarioResource extends Resource
                     ->openUrlInNewTab(),
                 Action::make('misMotos')
                     ->label('Nire motoak')
-                    ->url(fn ($record) => route('filament.admin.pages.proba.{usuario}', ['usuario' => $record->id]))
+                    ->url(fn($record) => route('filament.admin.pages.moto-page.{usuario}', ['usuario' => $record->id])),
+                Action::make('misCoches')
+                    ->label('Nire autoak')
+                    ->url(fn($record) => route('filament.admin.pages.coche-page.{usuario}', ['usuario' => $record->id]))
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
