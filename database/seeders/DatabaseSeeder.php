@@ -6,8 +6,6 @@ use App\Models\User;
 use App\Models\Usuario;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-
 
 
 class DatabaseSeeder extends Seeder
@@ -17,20 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-     //User::factory(10)->create();
-        // Usuario::factory()->count(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'admin',
-        //     'email' => 'admin@example.com',
-        //     'password' => bcrypt('password'), // Use bcrypt for password hashing
-        // ]);
-
-        User::create([
+        //User::factory(10)->create();
+        Usuario::factory()->count(10)->create();
+        
+        User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@example.com',
-            'password' => bcrypt('password'),
-            'email_verified_at' => now(),
+            'password' => bcrypt('password'), // Use bcrypt for password hashing
         ]);
     }
 }
