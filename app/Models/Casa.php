@@ -10,4 +10,9 @@ class Casa extends Model
         'direccion',
         'habitaciones',
     ];
+
+    public function habitaciones()
+    {
+        return $this->hasMany(Habitacion::class);
+    }
 }
