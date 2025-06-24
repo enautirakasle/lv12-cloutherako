@@ -64,7 +64,10 @@ class UsuarioResource extends Resource
                     ),
                 Action::make('misCoches')
                     ->label('Nire autoak')
-                    ->url(fn($record) => route('filament.admin.pages.coche-page.{usuario}', ['usuario' => $record->id]))
+                    ->url(fn($record) => route('filament.admin.pages.coche-page.{usuario}', ['usuario' => $record->id])),
+                Action::make('komunkazioa')->label('Komunikazioa')
+                                    ->url(fn($record) => route('filament.admin.pages.coche-page.{usuario}', ['usuario' => $record->id])),
+
 
             ])
             ->bulkActions([
