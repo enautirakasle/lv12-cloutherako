@@ -76,6 +76,7 @@ class CasaResource extends Resource
         return [
             'index' => Pages\ListCasas::route('/'),
             'create' => Pages\CreateCasa::route('/create'),
+            'view' => Pages\ViewCasa::route('/{record}'),
             'edit' => Pages\EditCasa::route('/{record}/edit'),
         ];
     }
