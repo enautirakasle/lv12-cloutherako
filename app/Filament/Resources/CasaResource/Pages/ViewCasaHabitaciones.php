@@ -8,6 +8,7 @@ use Filament\Resources\Pages\ViewRecord;
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\CasaResource\RelationManagers\HabitacionesRelationManager;
 
 
 class ViewCasaHabitaciones extends ViewRecord
@@ -23,5 +24,12 @@ class ViewCasaHabitaciones extends ViewRecord
                 TextEntry::make('direccion'),
                 // TextEntry::make('habitaciones')
             ]);
+    }
+
+    protected function getAllRelationManagers(): array
+    {
+        return [
+            HabitacionesRelationManager::class,
+        ];
     }
 }
