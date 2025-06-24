@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -72,13 +73,28 @@ class CasaResource extends Resource
         ];
     }
 
+     // AQUÍ va el método getRecordSubNavigation
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\ViewCasa::class,
+            Pages\EditCasa::class,
+            Pages\ViewCasaHabitaciones::class, // Tu nueva página
+        ]);
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListCasas::route('/'),
             'create' => Pages\CreateCasa::route('/create'),
             'view' => Pages\ViewCasa::route('/{record}'),
+            'view-habitaciones' => Pages\ViewCasaHabitaciones::route('/{record}/habitaciones'),
             'edit' => Pages\EditCasa::route('/{record}/edit'),
         ];
     }
+
+
+
+
 }
